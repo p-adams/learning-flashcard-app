@@ -1,5 +1,12 @@
+interface Card {
+  id: number;
+  word: string;
+  translation: string;
+  guess: string;
+}
 export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
   let guess = "";
+  let currentCard: Card | null = null;
   element.innerHTML = `<div class="cards-container">
     <dialog id="guessDialog">
       <input id="guess" placeholder="enter guess..."/>
@@ -32,18 +39,23 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
 
   cardsCtr?.addEventListener("click", (e) => {
     const target = e.target as HTMLDivElement;
+    const word = target.textContent;
+    currentCard = CARDS.find((card) => card.word === word) ?? null;
     guessDialog?.showModal();
-    console.log(target.textContent);
   });
+
   guessInput?.addEventListener("input", (e) => {
     const target = e.target as HTMLInputElement;
-    guess = target.value;
+    currentCard!.guess = target.value;
   });
+
   cancelBtn?.addEventListener("click", (e) => {
+    currentCard!.guess = "";
     guessDialog?.close();
   });
+
   confirmBtn?.addEventListener("click", (e) => {
-    console.log("confirm: ", guess);
+    console.log("confirm: ", CARDS);
     guessDialog?.close();
   });
 }
