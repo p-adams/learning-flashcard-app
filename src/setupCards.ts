@@ -1,8 +1,18 @@
 export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
+  let guess = "";
   element.innerHTML = `<div class="cards-container">
-    
+    <dialog id="guessDialog">
+      <input id="guess" placeholder="enter guess..."/>
+      <button id="cancel">Cancel</button>
+      <button id="confirm">Confirm</button>
+    </dialog>
+    <div class="cards-grid"/>
   </div>`;
-  const cardsCtr = document.querySelector(".cards-container");
+  const cardsCtr = document.querySelector(".cards-grid");
+  const guessDialog = document.querySelector<HTMLDialogElement>("#guessDialog");
+  const cancelBtn = document.querySelector<HTMLButtonElement>("#cancel");
+  const confirmBtn = document.querySelector<HTMLButtonElement>("#confirm");
+  const guessInput = document.querySelector<HTMLInputElement>("#guess");
   const CARDS = [
     { id: 0, word: "مرحباً", translation: "Hello", guess: "" },
     { id: 1, word: "شكراً", translation: "Thank you", guess: "" },
@@ -22,6 +32,18 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
 
   cardsCtr?.addEventListener("click", (e) => {
     const target = e.target as HTMLDivElement;
+    guessDialog?.showModal();
     console.log(target.textContent);
+  });
+  guessInput?.addEventListener("input", (e) => {
+    const target = e.target as HTMLInputElement;
+    guess = target.value;
+  });
+  cancelBtn?.addEventListener("click", (e) => {
+    guessDialog?.close();
+  });
+  confirmBtn?.addEventListener("click", (e) => {
+    console.log("confirm: ", guess);
+    guessDialog?.close();
   });
 }
