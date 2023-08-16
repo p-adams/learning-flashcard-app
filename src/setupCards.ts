@@ -5,7 +5,6 @@ interface Card {
   guess: string;
 }
 export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
-  let guess = "";
   let currentCard: Card | null = null;
   element.innerHTML = `<div class="cards-container">
     <dialog id="guessDialog">
@@ -49,12 +48,12 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
     currentCard!.guess = target.value;
   });
 
-  cancelBtn?.addEventListener("click", (e) => {
+  cancelBtn?.addEventListener("click", () => {
     currentCard!.guess = "";
     guessDialog?.close();
   });
 
-  confirmBtn?.addEventListener("click", (e) => {
+  confirmBtn?.addEventListener("click", () => {
     console.log("confirm: ", CARDS);
     guessDialog?.close();
   });
