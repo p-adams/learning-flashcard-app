@@ -14,7 +14,7 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
     </dialog>
     <div class="cards-grid"/>
   </div>`;
-  const cardsCtr = document.querySelector(".cards-grid");
+  const cardsCtr = document.querySelector<HTMLDivElement>(".cards-grid");
   const guessDialog = document.querySelector<HTMLDialogElement>("#guessDialog");
   const cancelBtn = document.querySelector<HTMLButtonElement>("#cancel");
   const confirmBtn = document.querySelector<HTMLButtonElement>("#confirm");
