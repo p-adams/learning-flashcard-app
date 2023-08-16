@@ -19,7 +19,7 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
   const cancelBtn = document.querySelector<HTMLButtonElement>("#cancel");
   const confirmBtn = document.querySelector<HTMLButtonElement>("#confirm");
   const guessInput = document.querySelector<HTMLInputElement>("#guess");
-  const CARDS = [
+  const CARDS: Card[] = [
     { id: 0, word: "مرحباً", translation: "Hello", guess: "" },
     { id: 1, word: "شكراً", translation: "Thank you", guess: "" },
     { id: 2, word: "ماء", translation: "Water", guess: "" },
