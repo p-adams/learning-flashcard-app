@@ -14,9 +14,14 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
     { id: 7, word: "وردة", translation: "Flower", guess: "" },
     { id: 8, word: "شمس", translation: "Sun", guess: "" },
   ];
-  for (const [index, card] of CARDS.entries()) {
+  for (const [, card] of CARDS.entries()) {
     const el = document.createElement("div");
-    el.innerHTML = `<div>${card.word}</div>`;
+    el.innerHTML = `<div id="card">${card.word}</div>`;
     cardsCtr?.appendChild(el);
   }
+
+  cardsCtr?.addEventListener("click", (e) => {
+    const target = e.target as HTMLDivElement;
+    console.log(target.textContent);
+  });
 }
