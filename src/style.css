@@ -43,6 +43,11 @@ h1 {
   text-align: center;
 }
 
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
