@@ -55,6 +55,35 @@ export function setupCards<T extends HTMLElement = HTMLElement>(element: T) {
 
   confirmBtn?.addEventListener("click", () => {
     console.log("confirm: ", CARDS);
-    guessDialog?.close();
+    if (currentCard?.guess.trim() !== "") {
+      cardsCtr!.innerHTML = "";
+      for (const [, card] of CARDS.entries()) {
+        const el = document.createElement("div");
+        if (card.guess !== "") {
+          const $card = CARDS.find(($card) => $card.id === card.id) ?? null;
+          el.innerHTML = `<div id="card" class="flipped ${
+            $card?.guess === card.translation ? "correct" : "incorrect"
+          }">
+            <div>Answer: ${card.translation}</div>
+            <div>Guess: ${$card?.guess}</div>
+          </div>`;
+          cardsCtr?.appendChild(el);
+        } else {
+          el.innerHTML = `<div id="card">${card.word}</div>`;
+          cardsCtr?.appendChild(el);
+        }
+      }
+      const wordsGuessedCount = CARDS.filter(
+        (card) => card.guess !== ""
+      ).length;
+      const cardCount = CARDS.length;
+      if (wordsGuessedCount === cardCount) {
+        const correct = CARDS.filter(
+          (card) => card.guess === card.translation
+        ).length;
+        alert(`${correct} / ${cardCount} : SCORE ${correct / cardCount}%`);
+      }
+      guessDialog?.close();
+    }
   });
 }

@@ -46,6 +46,31 @@ h1 {
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+}
+
+.cards-grid > div {
+  height: 100%;
+}
+#card {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  outline: 1px solid lightgray;
+}
+
+.flipped {
+  box-shadow: 4px 4px 2px 1px gray;
+}
+
+.flipped.correct {
+  border: 2px solid green;
+}
+
+.flipped.incorrect {
+  border: 2px solid red;
 }
 
 .logo {
